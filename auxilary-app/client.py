@@ -10,10 +10,10 @@ slicer = Slic3rModule.Slic3rModule()
 def slice():
    if request.method == 'POST':
     slicer.addModel(request.form.stlPath)
-    slicer.slice("out.gcode",0,0)
-    
+    slicer.slice(request.form.name + ".gcode",0,0)
+    os.replace(request.form.name + ".gcode" , "../gcodes/" + request.form.name + ".gcode")
+    return request.form.name + ".gcode"
    else:
       return 'GET not supported'
 
-if __name__ == '__main__':
 
