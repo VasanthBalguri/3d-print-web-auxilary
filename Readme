@@ -4,3 +4,6 @@ virtualenv /path/to/folder -> create venv
 source /path/to/folder/bin/activate -> use venv
 
 deactivate -> exit venv
+
+
+requires printcore libraries

@@ -27,6 +27,12 @@ task = "null"
 machineid = ""
 p = printcore(port, baud)
 p.loud = True
+
+def temp_callback(a):
+    global temprature
+    temprature = a.split()[1][2:]
+    return temprature
+
 p.tempcb = temp_callback
 
 class MonitorThread (threading.Thread):
@@ -77,9 +83,7 @@ def monitor():
     sio.emit('getIiotData',data + ",frame:" + frame + "}")
     time.sleep(1/60)
 
-m = Monitorthread()
-
-
+m = MonitorThread("1","monitor")
 @sio.event
 def connect():
 	print("CONNECTED")
@@ -166,11 +170,6 @@ def disbaleMonitor():
     global idle
     idle = 1
     return 'monitoring_disabled'
-
-def temp_callback(a):
-    global temprature
-    temprature = a.split()[1][2:]
-    return temprature
 
 #sio.connect("http://192.168.0.5:3000")
 
